@@ -12,25 +12,29 @@ public class Player : MonoBehaviour
 
     private GameObject holding = null;
 
-    private float acceleration;
-    private float distanceMoved = 0;
-    public float lastDistanceMoved = 0;
-    private Vector2 last;
+    private Animator animator;
 
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         facingLeft = false;
-        last = transform.position;
+        animator = GetComponent<Animator>();
     }
+    
     // Update is called once per frame
     void Update()
     {
         if (GameManager.S.gameState == GameManager.GameState.playing)
         {
             float horizontalMove = Input.GetAxisRaw("Horizontal");
-            if (horizontalMove < 0) facingLeft = true;
-            else if (horizontalMove > 0) facingLeft = false;
+            if (horizontalMove < 0)
+            {
+                facingLeft = true;
+            }
+            else if (horizontalMove > 0)
+            {
+                facingLeft = false;
+            }
 
             if (Input.GetKeyDown("space") && holding == null)
             {
@@ -42,14 +46,12 @@ public class Player : MonoBehaviour
                 holding.GetComponent<Rigidbody2D>().AddRelativeForce((facingLeft ? Vector2.left : Vector2.right)/ 30, ForceMode2D.Force);
                 holding.GetComponent<Transform>().parent = null;
                 holding = null;
+                animator.SetBool("carrying", false);
             }
             else if (holding != null)
             {
                 holding.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-
-            UpdateAcceleration();
-            Debug.Log(acceleration);
         }
     }
 
@@ -69,18 +71,10 @@ public class Player : MonoBehaviour
 
             //collision.transform.position = newPos;
             holding = collision.gameObject;
+
+            animator.SetBool("carrying", true);
         }
     }
-
-    private void UpdateAcceleration()
-    {
-        distanceMoved = Vector2.Distance(last, transform.position);
-        distanceMoved *= Time.deltaTime;
-        acceleration = distanceMoved - lastDistanceMoved;
-        lastDistanceMoved = distanceMoved;
-        last = transform.position;
-    }
-
     //private void OnTriggerStay2D(Collider2D collision)
     //{
     //    if (collision.gameObject.tag == "Cargo")
@@ -103,14 +97,15 @@ public class Player : MonoBehaviour
     //    }
     //}
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Cargo")
-    //    {
-    //        holding = null;
-    //        collision.transform.parent = null;
-    //        collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-    //    }
-    //}
+//     private void OnTriggerExit2D(Collider2D collision)
+//     {
+//         if (collision.gameObject.tag == "Cargo")
+//         {
+//             holding = null;
+//             collision.transform.parent = null;
+//             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+//             animator.SetBool("carrying", false);
+//         }
+//     }
 
 }
