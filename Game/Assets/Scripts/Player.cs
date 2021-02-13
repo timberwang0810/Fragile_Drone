@@ -12,10 +12,13 @@ public class Player : MonoBehaviour
 
     private GameObject holding = null;
 
+    private Animator animator;
+
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         facingLeft = false;
+        animator = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
@@ -23,8 +26,14 @@ public class Player : MonoBehaviour
         if (GameManager.S.gameState == GameManager.GameState.playing)
         {
             float horizontalMove = Input.GetAxisRaw("Horizontal");
-            if (horizontalMove < 0) facingLeft = true;
-            else if (horizontalMove > 0) facingLeft = false;
+            if (horizontalMove < 0)
+            {
+                facingLeft = true;
+            }
+            else if (horizontalMove > 0)
+            {
+                facingLeft = false;
+            }
 
             if (Input.GetKeyDown("space") && holding == null)
             {
@@ -36,6 +45,7 @@ public class Player : MonoBehaviour
                 //holding.GetComponent<Rigidbody2D>().AddRelativeForce(Vector3.forward * 10, ForceMode2D.Force);
                 holding.GetComponent<Transform>().parent = null;
                 holding = null;
+                animator.SetBool("carrying", false);
             }
             else if (holding != null)
             {
@@ -60,6 +70,8 @@ public class Player : MonoBehaviour
 
             //collision.transform.position = newPos;
             holding = collision.gameObject;
+
+            animator.SetBool("carrying", true);
         }
     }
 
@@ -92,6 +104,7 @@ public class Player : MonoBehaviour
             holding = null;
             collision.transform.parent = null;
             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+            animator.SetBool("carrying", false);
         }
     }
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6943538865977573234}
   m_Layer: 0
   m_Name: ConveyerBelt
-  m_TagString: ConveyerBelt
+  m_TagString: BeltPiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -22,7 +22,7 @@ public class Cargo : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "ConveyerBelt" && transform.parent == null)
+        if (collision.gameObject.tag == "BeltPiece" && transform.parent == null)
         {
             ConveyerBelt cb = collision.gameObject.GetComponent<ConveyerBelt>();
             Vector3 newPos = new Vector3(transform.position.x + (cb.direction * Time.deltaTime * cb.speed), transform.position.y, transform.position.z);
@@ -43,9 +43,8 @@ public class Cargo : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log(collision.relativeVelocity.magnitude);
-        //float hit = 0.5f * rb.mass * Mathf.Pow(rb.velocity.magnitude, 2);
-        float v;
+
+        float v = 0;
         
         if (transform.parent != null)
         {
@@ -59,7 +58,17 @@ public class Cargo : MonoBehaviour
         //Debug.Log(hit);
         if (v > 5)
         {
-            Debug.Log("fast");
+            health -= 1;
+            SoundManager.S.BoxLandHard();
+        }
+        else
+        {
+            SoundManager.S.BoxLandSoft();
+        }
+
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 

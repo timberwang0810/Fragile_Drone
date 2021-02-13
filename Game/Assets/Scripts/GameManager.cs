@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private void StartRound()
     {
         gameState = GameState.playing;
-        SoundManager.S.playMusic();
+        //SoundManager.S.playMusic();
         StartCoroutine(GameTimer());
     }
 
