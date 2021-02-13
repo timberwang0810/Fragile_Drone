@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private bool facingLeft;
 
+
     GameObject holding = null;
 
     private void Start()
@@ -17,17 +18,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalMove = Input.GetAxisRaw("Horizontal");
-        if (horizontalMove < 0) facingLeft = true;
-        else if (horizontalMove > 0) facingLeft = false;
-
-        if (holding != null)
+        if (GameManager.S.gameState == GameManager.GameState.playing)
         {
-            if (Input.GetKeyUp("space"))
+            float horizontalMove = Input.GetAxisRaw("Horizontal");
+            if (horizontalMove < 0) facingLeft = true;
+            else if (horizontalMove > 0) facingLeft = false;
+
+            if (holding != null)
             {
-                holding.GetComponent<Rigidbody2D>().gravityScale = 1;
-                holding.GetComponent<Transform>().parent = null;
-                holding = null;
+                if (Input.GetKeyUp("space"))
+                {
+                    holding.GetComponent<Rigidbody2D>().gravityScale = 1;
+                    holding.GetComponent<Transform>().parent = null;
+                    holding = null;
+                }
             }
         }
     }
