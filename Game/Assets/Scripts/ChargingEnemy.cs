@@ -9,9 +9,12 @@ public class ChargingEnemy : Enemy
     public float searchRadius;
     public float speed;
     private bool player_locked;
+    private bool patrolling;
+    private bool facingLeft;
     private Vector2 playerLocation;
 
     public LayerMask rayCastLayers;
+    public Transform patrolPostLocation;
     protected override void OnEnemyDeath()
     {
         Debug.Log("Ahhh im dead");
@@ -22,23 +25,37 @@ public class ChargingEnemy : Enemy
     protected override void OnPlayerSighting()
     {
         GameObject[] playerInRange = Physics2D.OverlapCircleAll(transform.position, searchRadius).Select<Collider2D, GameObject>(c => c.gameObject).Where<GameObject>(obj => obj.CompareTag("Player")).ToArray();
-        //Debug.Log(playerInRange.Length);
         if (playerInRange.Length == 0)
         {
             player_locked = false;
-            //Debug.Log("1 REACHED");
             return;
         }
-        //if (player_locked && Vector2.Distance(transform.position, playerLocation) > 0)
-        //{
-        //    Debug.Log("2 REACHED");
-        //    return;
-        //}
-        //Debug.Log("3 REACHED");
         GameObject player = playerInRange[0];
         playerLocation = player.transform.position;
-        Debug.Log("New Position");
+        patrolling = false;
         player_locked = true;
+    }
+
+    protected override void Patrol()
+    {
+        if (player_locked) return;
+        if (!patrolling && transform.position != patrolPostLocation.position)
+        {
+            transform.position = patrolPostLocation.position;
+            // TODO: Add cool teleportation effect
+        }
+        else
+        {
+            patrolling = true;
+            if (facingLeft)
+            {
+                transform.position += Vector3.left * speed * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += Vector3.right * speed * Time.deltaTime;
+            }
+        }
     }
 
     private void Charge()
@@ -49,27 +66,18 @@ public class ChargingEnemy : Enemy
         if (hit.collider != null)
         {
             transform.position = Vector2.MoveTowards(transform.position, hit.point, Time.deltaTime * speed);
-            if (Vector2.Distance(transform.position, hit.point) == 0)
-            {
-                player_locked = false;
-                return;
-            }
         }
         else
         {
             transform.position = Vector2.MoveTowards(transform.position, playerLocation, Time.deltaTime * speed);
-            if (Vector2.Distance(transform.position, playerLocation) == 0)
-            {
-                player_locked = false;
-                return;
-            }
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // TODO: Patrol called here
+        patrolling = true;
+        facingLeft = true;
         player_locked = false;
 
         // Set initial location far away
@@ -78,7 +86,16 @@ public class ChargingEnemy : Enemy
 
     private void Update()
     {
+        Patrol();
         OnPlayerSighting();
         Charge();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (patrolling && collision.gameObject.layer == 8)
+        {
+            facingLeft = !facingLeft;
+        }
     }
 }

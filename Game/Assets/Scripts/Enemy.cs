@@ -15,4 +15,5 @@ public abstract class Enemy : MonoBehaviour
 
     protected abstract void OnPlayerSighting();
     protected abstract void OnEnemyDeath();
+    protected abstract void Patrol();
 }
