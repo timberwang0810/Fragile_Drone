@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public int startHP;
     private int currHP;
 
+    public GameObject playerObject;
+
 
     private void Awake()
     {
@@ -57,6 +59,9 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDeath()
     {
         Debug.Log("hi im dead inside");
+        // TODO: Add explosion / death effects
+        playerObject.transform.DetachChildren();
+        Destroy(playerObject);
     }
 
     private IEnumerator GetReady()
