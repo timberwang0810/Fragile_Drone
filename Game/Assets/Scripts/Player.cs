@@ -14,11 +14,15 @@ public class Player : MonoBehaviour
 
     private Animator animator;
 
+    private SpriteRenderer mySpriteRenderer;
+
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         facingLeft = false;
         animator = GetComponent<Animator>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+
     }
     // Update is called once per frame
     void Update()
@@ -29,10 +33,12 @@ public class Player : MonoBehaviour
             if (horizontalMove < 0)
             {
                 facingLeft = true;
+                mySpriteRenderer.flipX = true;
             }
             else if (horizontalMove > 0)
             {
                 facingLeft = false;
+                mySpriteRenderer.flipX = false;
             }
 
             if (Input.GetKeyDown("space") && holding == null)
