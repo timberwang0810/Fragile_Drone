@@ -2072,6 +2072,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb34e33b35dd41079dd62fc4f47ea03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droneReach: 2.5
+  pickupLayers:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!4 &599684202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5722282324591259886, guid: 45f4f4ef24f728a4daea66163ebd9b65, type: 3}
