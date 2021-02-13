@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyUp("space"))
                 {
                     holding.GetComponent<Rigidbody2D>().gravityScale = 1;
+                    //holding.GetComponent<Rigidbody2D>().AddRelativeForce(Vector3.forward * 10, ForceMode2D.Force);
                     holding.GetComponent<Transform>().parent = null;
                     holding = null;
                 }
