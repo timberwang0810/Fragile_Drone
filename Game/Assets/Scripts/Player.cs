@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
         mySpriteRenderer = GetComponent<SpriteRenderer>();
 
     }
+    
     // Update is called once per frame
     void Update()
     {
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
             if (holding != null && (Input.GetKeyUp("space") || Vector2.Distance(transform.position, holding.transform.position) > droneReach))
             {
                 holding.GetComponent<Rigidbody2D>().gravityScale = 1;
-                //holding.GetComponent<Rigidbody2D>().AddRelativeForce(Vector3.forward * 10, ForceMode2D.Force);
+                holding.GetComponent<Rigidbody2D>().AddRelativeForce((facingLeft ? Vector2.left : Vector2.right)/ 30, ForceMode2D.Force);
                 holding.GetComponent<Transform>().parent = null;
                 holding = null;
                 animator.SetBool("carrying", false);
@@ -80,7 +81,6 @@ public class Player : MonoBehaviour
             animator.SetBool("carrying", true);
         }
     }
-
     //private void OnTriggerStay2D(Collider2D collision)
     //{
     //    if (collision.gameObject.tag == "Cargo")
@@ -103,15 +103,15 @@ public class Player : MonoBehaviour
     //    }
     //}
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Cargo")
-        {
-            holding = null;
-            collision.transform.parent = null;
-            collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-            animator.SetBool("carrying", false);
-        }
-    }
+//     private void OnTriggerExit2D(Collider2D collision)
+//     {
+//         if (collision.gameObject.tag == "Cargo")
+//         {
+//             holding = null;
+//             collision.transform.parent = null;
+//             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+//             animator.SetBool("carrying", false);
+//         }
+//     }
 
 }

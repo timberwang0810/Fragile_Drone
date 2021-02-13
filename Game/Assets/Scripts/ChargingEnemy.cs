@@ -7,7 +7,9 @@ public class ChargingEnemy : Enemy
 {
 
     public float searchRadius;
-    public float speed;
+    public float patrolSpeed;
+    public float chargeSpeed;
+    public float repelStrength;
     private bool player_locked;
     private bool patrolling;
     private bool facingLeft;
@@ -49,11 +51,11 @@ public class ChargingEnemy : Enemy
             patrolling = true;
             if (facingLeft)
             {
-                transform.position += Vector3.left * speed * Time.deltaTime;
+                transform.position += Vector3.left * patrolSpeed * Time.deltaTime;
             }
             else
             {
-                transform.position += Vector3.right * speed * Time.deltaTime;
+                transform.position += Vector3.right * patrolSpeed * Time.deltaTime;
             }
         }
     }
@@ -65,11 +67,11 @@ public class ChargingEnemy : Enemy
         RaycastHit2D hit = Physics2D.Raycast(transform.position, playerLocation - new Vector2(transform.position.x, transform.position.y), Mathf.Infinity, rayCastLayers);
         if (hit.collider != null)
         {
-            transform.position = Vector2.MoveTowards(transform.position, hit.point, Time.deltaTime * speed);
+            transform.position = Vector2.MoveTowards(transform.position, hit.point, Time.deltaTime * chargeSpeed);
         }
         else
         {
-            transform.position = Vector2.MoveTowards(transform.position, playerLocation, Time.deltaTime * speed);
+            transform.position = Vector2.MoveTowards(transform.position, playerLocation, Time.deltaTime * chargeSpeed);
         }
     }
 
@@ -96,6 +98,19 @@ public class ChargingEnemy : Enemy
         if (patrolling && collision.gameObject.layer == 8)
         {
             facingLeft = !facingLeft;
+        }
+
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameManager.S.takeDamage();
+            Vector2 dir = collision.gameObject.transform.position - transform.position;
+            dir.Normalize();
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * repelStrength, ForceMode2D.Impulse);
         }
     }
 }
