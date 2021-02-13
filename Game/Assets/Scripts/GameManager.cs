@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameState { menu, getReady, playing, oops, gameOver };
+    // Game State
+    public GameState gameState;
+    // Singleton Declaration
     public static GameManager S;
 
+    public int getReadyTime;
     public int startHP;
     private int currHP;
+
 
     private void Awake()
     {
@@ -26,6 +32,18 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currHP = startHP;
+        StartNewGame();
+    }
+
+    private void StartNewGame()
+    {
+        gameState = GameState.getReady;
+        StartCoroutine(GetReady());
+    }
+
+    private void StartRound()
+    {
+        gameState = GameState.playing;
     }
 
     public void takeDamage()
@@ -39,5 +57,15 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDeath()
     {
         Debug.Log("hi im dead inside");
+    }
+
+    private IEnumerator GetReady()
+    {
+        Debug.Log("GetReady!");
+        // TODO: Show pop-up message telling player to get ready
+        yield return new WaitForSeconds(getReadyTime);
+        // TODO: Hide message
+        Debug.Log("Go");
+        StartRound();
     }
 }

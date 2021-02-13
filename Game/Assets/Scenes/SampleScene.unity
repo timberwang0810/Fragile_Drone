@@ -6486,8 +6486,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a749e332e704323abe612ba677cf48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
+  getReadyTime: 3
   startHP: 3
-  livesStart: 3
 --- !u!1 &1855358343
 GameObject:
   m_ObjectHideFlags: 0
