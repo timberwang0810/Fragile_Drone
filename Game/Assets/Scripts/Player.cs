@@ -12,10 +12,16 @@ public class Player : MonoBehaviour
 
     private GameObject holding = null;
 
+    private float acceleration;
+    private float distanceMoved = 0;
+    public float lastDistanceMoved = 0;
+    private Vector2 last;
+
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         facingLeft = false;
+        last = transform.position;
     }
     // Update is called once per frame
     void Update()
@@ -33,7 +39,7 @@ public class Player : MonoBehaviour
             if (holding != null && (Input.GetKeyUp("space") || Vector2.Distance(transform.position, holding.transform.position) > droneReach))
             {
                 holding.GetComponent<Rigidbody2D>().gravityScale = 1;
-                //holding.GetComponent<Rigidbody2D>().AddRelativeForce(Vector3.forward * 10, ForceMode2D.Force);
+                holding.GetComponent<Rigidbody2D>().AddRelativeForce((facingLeft ? Vector2.left : Vector2.right)/ 30, ForceMode2D.Force);
                 holding.GetComponent<Transform>().parent = null;
                 holding = null;
             }
@@ -41,6 +47,9 @@ public class Player : MonoBehaviour
             {
                 holding.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
+
+            UpdateAcceleration();
+            Debug.Log(acceleration);
         }
     }
 
@@ -61,6 +70,15 @@ public class Player : MonoBehaviour
             //collision.transform.position = newPos;
             holding = collision.gameObject;
         }
+    }
+
+    private void UpdateAcceleration()
+    {
+        distanceMoved = Vector2.Distance(last, transform.position);
+        distanceMoved *= Time.deltaTime;
+        acceleration = distanceMoved - lastDistanceMoved;
+        lastDistanceMoved = distanceMoved;
+        last = transform.position;
     }
 
     //private void OnTriggerStay2D(Collider2D collision)
