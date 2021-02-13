@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager S;
 
     public int getReadyTime;
+    public int gameTime;
     public int startHP;
     private int currHP;
 
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     private void StartRound()
     {
         gameState = GameState.playing;
+        StartCoroutine(GameTimer());
     }
 
     private void GameOver()
@@ -64,13 +66,19 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerWon()
     {
+        StopAllCoroutines();
+        gameState = GameState.oops;
         // TODO: Displays Game Won UI (with coroutine)
+        Debug.Log("WON!");
         GameOver();
     }
 
     private void OnPlayerLost()
     {
+        StopAllCoroutines();
+        gameState = GameState.oops;
         // TODO: Displays Game Lost UI (with coroutine)
+        Debug.Log("LOST!");
         GameOver();
     }
     private void OnPlayerDeath()
@@ -90,5 +98,19 @@ public class GameManager : MonoBehaviour
         // TODO: Hide message
         Debug.Log("Go");
         StartRound();
+    }
+
+    private IEnumerator GameTimer()
+    {
+        for (int i = 0; i < gameTime; i++)
+        {
+            Debug.Log(i);
+            yield return new WaitForSeconds(1);
+            // TODO: Update time display UI
+        }
+        if (gameState == GameState.playing)
+        {
+            OnPlayerLost();
+        }
     }
 }

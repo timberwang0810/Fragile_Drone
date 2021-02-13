@@ -6426,6 +6426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   getReadyTime: 3
+  gameTime: 120
   startHP: 3
   playerObject: {fileID: 596587757}
 --- !u!1 &1855358343
