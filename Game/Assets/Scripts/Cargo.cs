@@ -25,4 +25,15 @@ public class Cargo : MonoBehaviour
             transform.position = newPos;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "LoadingBay")
+        {
+            Debug.Log("scored");
+            Destroy(this.gameObject);
+            GameManager.S.scored();
+            
+        }
+    }
 }

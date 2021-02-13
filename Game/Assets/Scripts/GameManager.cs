@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +11,15 @@ public class GameManager : MonoBehaviour
     // Singleton Declaration
     public static GameManager S;
 
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI statusText;
+
     public int getReadyTime;
     public int gameTime;
     public int startHP;
     private int currHP;
+    public int score;
 
     public GameObject playerObject;
 
@@ -34,7 +40,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        score = 0;
         currHP = startHP;
+        timeText.text = "Time: " + gameTime;
         StartNewGame();
     }
 
@@ -47,12 +55,14 @@ public class GameManager : MonoBehaviour
     private void StartRound()
     {
         gameState = GameState.playing;
+        SoundManager.S.playMusic();
         StartCoroutine(GameTimer());
     }
 
     private void GameOver()
     {
         gameState = GameState.gameOver;
+        SoundManager.S.stopMusic();
         // TODO: Restart Mechanics (UI button)
     }
 
@@ -94,8 +104,17 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GetReady!");
         // TODO: Show pop-up message telling player to get ready
-        yield return new WaitForSeconds(getReadyTime);
-        // TODO: Hide message
+        statusText.enabled = true;
+        statusText.text = "Get Ready!";
+        for (int i = 0; i < getReadyTime; i++)
+        {
+            statusText.text = (getReadyTime - i).ToString();
+            yield return new WaitForSeconds(1);
+        }
+
+        statusText.text = "Go!";
+        yield return new WaitForSeconds(1);
+        statusText.enabled = false;
         Debug.Log("Go");
         StartRound();
     }
@@ -106,11 +125,18 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(i);
             yield return new WaitForSeconds(1);
-            // TODO: Update time display UI
+            timeText.text = "Time: " + (gameTime - i);
+
         }
         if (gameState == GameState.playing)
         {
             OnPlayerLost();
         }
+    }
+
+    public void scored()
+    {
+        score += 1;
+        scoreText.text = "Score: " + score;
     }
 }

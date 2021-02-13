@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cargo
   - ConveyerBelt
+  - LoadingBay
   layers:
   - Default
   - TransparentFX
