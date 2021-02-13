@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private bool facingLeft;
 
+
     GameObject holding = null;
 
     private void Start()
