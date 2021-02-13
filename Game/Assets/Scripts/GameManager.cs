@@ -139,4 +139,5 @@ public class GameManager : MonoBehaviour
         score += 1;
         scoreText.text = "Score: " + score;
     }
+
 }
