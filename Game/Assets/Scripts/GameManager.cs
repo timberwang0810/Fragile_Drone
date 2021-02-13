@@ -48,6 +48,12 @@ public class GameManager : MonoBehaviour
         gameState = GameState.playing;
     }
 
+    private void GameOver()
+    {
+        gameState = GameState.gameOver;
+        // TODO: Restart Mechanics (UI button)
+    }
+
     public void takeDamage()
     {
         if (currHP <= 0) return;
@@ -56,12 +62,24 @@ public class GameManager : MonoBehaviour
         if (currHP == 0) OnPlayerDeath();
     }
 
+    private void OnPlayerWon()
+    {
+        // TODO: Displays Game Won UI (with coroutine)
+        GameOver();
+    }
+
+    private void OnPlayerLost()
+    {
+        // TODO: Displays Game Lost UI (with coroutine)
+        GameOver();
+    }
     private void OnPlayerDeath()
     {
         Debug.Log("hi im dead inside");
         // TODO: Add explosion / death effects
         playerObject.transform.DetachChildren();
         Destroy(playerObject);
+        OnPlayerLost();
     }
 
     private IEnumerator GetReady()
