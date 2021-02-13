@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < gameTime; i++)
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             yield return new WaitForSeconds(1);
             timeText.text = "Time: " + (gameTime - i);
 

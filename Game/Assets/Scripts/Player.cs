@@ -85,14 +85,14 @@ public class Player : MonoBehaviour
     //    }
     //}
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Cargo")
-    //    {
-    //        holding = null;
-    //        collision.transform.parent = null;
-    //        collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-    //    }
-    //}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Cargo")
+        {
+            holding = null;
+            collision.transform.parent = null;
+            collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+        }
+    }
 
 }

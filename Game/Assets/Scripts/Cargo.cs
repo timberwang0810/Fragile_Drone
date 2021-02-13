@@ -5,10 +5,14 @@ using UnityEngine;
 public class Cargo : MonoBehaviour
 {
 
+    public int health;
+
+    private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -36,4 +40,27 @@ public class Cargo : MonoBehaviour
             
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log(collision.relativeVelocity.magnitude);
+        //float hit = 0.5f * rb.mass * Mathf.Pow(rb.velocity.magnitude, 2);
+        float v;
+        
+        if (transform.parent != null)
+        {
+            v = transform.parent.GetComponentInParent<PlayerMovement>().velocity;
+            //hit = 0.5f * rb.mass * Mathf.Pow(transform.parent.GetComponentInParent<Rigidbody2D>().velocity.magnitude, 2);
+        }
+        else {
+            v = collision.relativeVelocity.magnitude;
+            //Debug.Log("no parent " + v2);
+        }
+        //Debug.Log(hit);
+        if (v > 5)
+        {
+            Debug.Log("fast");
+        }
+    }
+
 }
