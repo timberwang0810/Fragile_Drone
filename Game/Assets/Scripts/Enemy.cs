@@ -6,6 +6,7 @@ public abstract class Enemy : MonoBehaviour
 {
 
     public float HP = 5;
+
     protected void TakeDamage(float damage)
     {
         if (HP <= 0) return;
@@ -16,4 +17,5 @@ public abstract class Enemy : MonoBehaviour
     protected abstract void OnPlayerSighting();
     protected abstract void OnEnemyDeath();
     protected abstract void Patrol();
+
 }
