@@ -2210,7 +2210,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 654b151987b2e2440a8c2ccd208e9edb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 03acac4f8302fc24593e6411342ac617, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2308,6 +2308,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ceac9dc6c90ef4783d668de1bd406c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droneHit1: {fileID: 8300000, guid: 01aeeca3f1446ae40a6c9c14896d2b72, type: 3}
+  droneHit2: {fileID: 8300000, guid: 35911223954438c4bad9e5b6e4178aa0, type: 3}
+  droneHit3: {fileID: 8300000, guid: c04f47a550ec97d419a3f38952209a68, type: 3}
+  boxHitSoft1: {fileID: 8300000, guid: 9d83850a4a55d684cb710f1ed7cd146c, type: 3}
+  boxHitSoft2: {fileID: 8300000, guid: 5026f56c8cf9b5144a5584cecad35c9a, type: 3}
+  boxHitSoft3: {fileID: 8300000, guid: 8b66ab81343e4fd4696cc5c1c19eb454, type: 3}
+  boxHitHard1: {fileID: 8300000, guid: 19bd8b1571f1c3e4e9a1334d036ca605, type: 3}
+  boxHitHard2: {fileID: 8300000, guid: c13d648a57d136b4abe4ef320b969f01, type: 3}
+  boxHitHard3: {fileID: 8300000, guid: fa3106904910f744d80e0138fa80c544, type: 3}
+  pipes1: {fileID: 8300000, guid: 454c9c8e80c90b3409e52cb3c48de5f8, type: 3}
+  pipes2: {fileID: 8300000, guid: 1e9d1c750db22a948945d1990a39036c, type: 3}
+  pipes3: {fileID: 8300000, guid: c8ce063feb3a74843aa30269088a3414, type: 3}
+  enemyAlert: {fileID: 8300000, guid: 523a0d091ba178741b937607c0ccbc08, type: 3}
 --- !u!4 &756788452
 Transform:
   m_ObjectHideFlags: 0
