@@ -34,7 +34,6 @@ public class Cargo : MonoBehaviour
             Debug.Log("scored");
             Destroy(this.gameObject);
             GameManager.S.scored();
-            
         }
     }
 

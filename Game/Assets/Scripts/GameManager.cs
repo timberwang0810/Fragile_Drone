@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     private int currHP;
     public int score;
 
-    // TODO: Box Counts
     private int boxCount;
 
     public GameObject playerObject;
@@ -52,6 +51,7 @@ public class GameManager : MonoBehaviour
         timeText.text = "Time: " + gameTime;
         paused = false;
         middlePanel.SetActive(false);
+        boxCount = GameObject.FindGameObjectsWithTag("Cargo").Length;
         Time.timeScale = 1;
         StartNewGame();
     }
@@ -166,6 +166,8 @@ public class GameManager : MonoBehaviour
     {
         score += 1;
         scoreText.text = "Score: " + score;
+        boxCount--;
+        if (boxCount <= 0) OnPlayerWon();
     }
 
     public void OnGamePaused()
