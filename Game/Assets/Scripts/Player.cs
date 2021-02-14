@@ -73,9 +73,9 @@ public class Player : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + Vector3.down * droneReach, Color.blue, 10f);
         Collider2D collision = hit.collider;
         if (collision == null) return;
-        if (collision.gameObject.CompareTag("Cargo"))
+        if (collision.gameObject.CompareTag("Cargo") || collision.gameObject.CompareTag("Barrel"))
         {
-            //Debug.Log("Hit!!!");
+            Debug.Log("Hit!!!");
             collision.transform.parent = transform;
             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             //Vector3 newPos = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);

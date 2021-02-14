@@ -9,6 +9,7 @@ TagManager:
   - LoadingBay
   - BeltPiece
   - Enemy
+  - Barrel
   layers:
   - Default
   - TransparentFX

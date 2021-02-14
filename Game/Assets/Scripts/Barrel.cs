@@ -2,74 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cargo : MonoBehaviour
+public class Barrel : MonoBehaviour
 {
-
-    public int health;
-
-    private Rigidbody2D rb;
+    // Start is called before the first frame update
 
     private Animator animator;
+    private Rigidbody2D rb;
 
-    // Start is called before the first frame update
+    bool explosion = false;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "LoadingBay")
-        {
-            Debug.Log("scored");
-            Destroy(this.gameObject);
-            GameManager.S.scored();
-            
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         float v = 0;
-        
+
         if (transform.parent != null)
         {
             v = transform.parent.GetComponentInParent<PlayerMovement>().magnitude;
             //hit = 0.5f * rb.mass * Mathf.Pow(transform.parent.GetComponentInParent<Rigidbody2D>().velocity.magnitude, 2);
         }
-        else {
+        else
+        {
             v = collision.relativeVelocity.magnitude;
             //Debug.Log("no parent " + v2);
         }
         //Debug.Log(hit);
         if (v > 5)
         {
-            health -= 1;
-            if (health == 1)
-            {
-                animator.SetTrigger("damaged");
-            }
-            SoundManager.S.BoxLandHard();
+            //explode
+            animator.SetTrigger("explode");
+            explosion = true;
+            rb.bodyType = RigidbodyType2D.Static;
+            SoundManager.S.explodeBomb();
+            Destroy(this.gameObject, 0.5f);
         }
         else
         {
-            SoundManager.S.BoxLandSoft();
+            SoundManager.S.DronePipe();
         }
 
-        if (health <= 0)
+        if (collision.gameObject.tag == "Player" && explosion)
         {
-            Destroy(this.gameObject);
+            GameManager.S.takeDamage();
+            Vector2 dir = collision.gameObject.transform.position - transform.position;
+            dir.Normalize();
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 15, ForceMode2D.Impulse);
+        }
+        if (collision.gameObject.tag == "Enemy" && explosion)
+        {
+            Vector2 dir = collision.gameObject.transform.position - transform.position;
+            dir.Normalize();
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 15, ForceMode2D.Impulse);
+            Destroy(collision.gameObject);
         }
     }
 
@@ -83,5 +78,4 @@ public class Cargo : MonoBehaviour
             transform.position = newPos;
         }
     }
-
 }

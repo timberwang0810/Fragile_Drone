@@ -21,6 +21,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip pipes2;
     public AudioClip pipes3;
     public AudioClip enemyAlert;
+    public AudioClip bombExplode;
 
     private AudioSource audio;
 
@@ -52,6 +53,11 @@ public class SoundManager : MonoBehaviour
         audio.Stop();
         MuteButton.gameObject.SetActive(false);
         UnmuteButton.gameObject.SetActive(true);
+    }
+
+    public void explodeBomb()
+    {
+        audio.PlayOneShot(bombExplode);
     }
 
     public void DroneHit()

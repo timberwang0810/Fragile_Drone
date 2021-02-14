@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         SoundManager.S.DroneHit();
         if (currHP <= 0) return;
         currHP -= 1;
+        Debug.Log(currHP);
         if (currHP == 0) OnPlayerDeath();
     }
 
