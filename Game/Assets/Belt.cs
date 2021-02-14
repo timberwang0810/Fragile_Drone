@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConveyerBelt : MonoBehaviour
+public class Belt : MonoBehaviour
 {
-    public float speed;
-    public int direction;
 
+    public int speed;
+    public int direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,4 @@ public class ConveyerBelt : MonoBehaviour
     {
         
     }
-
-
 }

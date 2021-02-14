@@ -25,12 +25,7 @@ public class Cargo : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "BeltPiece" && transform.parent == null)
-        {
-            ConveyerBelt cb = collision.gameObject.GetComponent<ConveyerBelt>();
-            Vector3 newPos = new Vector3(transform.position.x + (cb.direction * Time.deltaTime * cb.speed), transform.position.y, transform.position.z);
-            transform.position = newPos;
-        }
+        Debug.Log("trugger" + collision.gameObject.tag);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -76,6 +71,17 @@ public class Cargo : MonoBehaviour
         if (health <= 0)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "ConveyerBelt" && transform.parent == null)
+        {
+            Belt cb = collision.gameObject.GetComponent<Belt>();
+            Vector3 newPos = new Vector3(transform.position.x + (cb.direction * Time.deltaTime * cb.speed), transform.position.y, transform.position.z);
+            transform.position = newPos;
         }
     }
 
