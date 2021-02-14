@@ -16,9 +16,11 @@ public class Emission : MonoBehaviour
     // Start delay -- gives all emissions different start times
     public float timeStartDelay;
 
+    private Animator emissionAnimator;
+
     private void Start()
     {
-        substance.SetActive(false);
+        emissionAnimator = substance.GetComponent<Animator>();
         StartEmission();
     }
 
@@ -37,9 +39,9 @@ public class Emission : MonoBehaviour
     {
         while (true)
         {
-            substance.SetActive(true);
+            emissionAnimator.SetBool("Emitting", true);
             yield return new WaitForSeconds(timeOfEmission);
-            substance.SetActive(false);
+            emissionAnimator.SetBool("Emitting", false);
             yield return new WaitForSeconds(timeBetweenEmission);
         }
     }
