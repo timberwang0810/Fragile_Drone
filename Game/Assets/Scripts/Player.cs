@@ -49,7 +49,12 @@ public class Player : MonoBehaviour
             if (holding != null && (Input.GetKeyUp("space") || Vector2.Distance(transform.position, holding.transform.position) > droneReach))
             {
                 holding.GetComponent<Rigidbody2D>().gravityScale = 1;
-                holding.GetComponent<Rigidbody2D>().AddRelativeForce((facingLeft ? Vector2.left : Vector2.right)/ 30, ForceMode2D.Force);
+
+                Vector2 v = GetComponent<PlayerMovement>().velocity;
+                Debug.Log("drop" + v);
+                holding.GetComponent<Rigidbody2D>().AddRelativeForce(v / 300, ForceMode2D.Force);
+
+            
                 holding.GetComponent<Transform>().parent = null;
                 holding = null;
                 animator.SetBool("carrying", false);

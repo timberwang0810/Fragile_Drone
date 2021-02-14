@@ -48,7 +48,7 @@ public class Cargo : MonoBehaviour
         
         if (transform.parent != null)
         {
-            v = transform.parent.GetComponentInParent<PlayerMovement>().velocity;
+            v = transform.parent.GetComponentInParent<PlayerMovement>().magnitude;
             //hit = 0.5f * rb.mass * Mathf.Pow(transform.parent.GetComponentInParent<Rigidbody2D>().velocity.magnitude, 2);
         }
         else {

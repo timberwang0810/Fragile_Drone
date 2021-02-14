@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private float verticalMove = 0.0f;
 
     Vector2 previous;
-    public float velocity = 0;
+    public Vector2 velocity = new Vector2(0, 0);
+    public float magnitude = 0;
 
     private void Start()
     {
@@ -28,11 +29,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position += transform.right * horizontalMove * Time.deltaTime;
         transform.position += transform.up * verticalMove * Time.deltaTime;
 
-        Vector2 newVec = new Vector2(transform.position.x - previous.x, transform.position.y - previous.y);
+        Vector2 newVel = new Vector2(transform.position.x - previous.x, transform.position.y - previous.y);
 
-        velocity = (newVec.magnitude) / Time.deltaTime;
+        velocity = newVel / Time.deltaTime;
+
+        magnitude = (newVel.magnitude) / Time.deltaTime;
         previous = transform.position;
-        //Debug.Log(velocity);
+        Debug.Log(velocity);
 
     }
 
