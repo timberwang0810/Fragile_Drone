@@ -25,7 +25,6 @@ public class Cargo : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("trugger" + collision.gameObject.tag);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,11 +55,7 @@ public class Cargo : MonoBehaviour
         //Debug.Log(hit);
         if (v > 5)
         {
-            health -= 1;
-            if (health == 1)
-            {
-                animator.SetTrigger("damaged");
-            }
+            takeDamage(1);
             SoundManager.S.BoxLandHard();
         }
         else
@@ -68,12 +63,23 @@ public class Cargo : MonoBehaviour
             SoundManager.S.BoxLandSoft();
         }
 
+        
+    }
+
+    public void takeDamage(int damage)
+    {
+        Debug.Log("ouch");
+        health -= damage;
+        if (health == 1)
+        {
+            animator.SetTrigger("damaged");
+        }
+
         if (health <= 0)
         {
             Destroy(this.gameObject);
         }
     }
-
 
     private void OnCollisionStay2D(Collision2D collision)
     {
