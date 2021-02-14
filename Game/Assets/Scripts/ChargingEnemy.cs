@@ -131,5 +131,11 @@ public class ChargingEnemy : Enemy
             dir.Normalize();
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * repelStrength, ForceMode2D.Impulse);
         }
+
+        if (collision.gameObject.tag == "TurnAround")
+        {
+            facingLeft = !facingLeft;
+            mySpriteRenderer.flipX = !mySpriteRenderer.flipX;
+        }
     }
 }
