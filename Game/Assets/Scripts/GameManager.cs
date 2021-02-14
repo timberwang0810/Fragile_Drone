@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public int score;
 
     public GameObject playerObject;
-
+    private Animator playerAnimator;
 
     private void Awake()
     {
@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void StartNewGame()
     {
+        playerAnimator = playerObject.GetComponent<Animator>();
         gameState = GameState.getReady;
         StartCoroutine(GetReady());
     }
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
 
     public void takeDamage()
     {
+        playerAnimator.SetTrigger("hurt");
+        SoundManager.S.DroneHit();
         if (currHP <= 0) return;
         currHP -= 1;
         Debug.Log(currHP);

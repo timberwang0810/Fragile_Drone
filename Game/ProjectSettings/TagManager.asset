@@ -8,6 +8,7 @@ TagManager:
   - ConveyerBelt
   - LoadingBay
   - BeltPiece
+  - Enemy
   layers:
   - Default
   - TransparentFX

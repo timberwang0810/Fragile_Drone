@@ -78,6 +78,25 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+
+    public void DronePipe()
+    {
+        int r = Random.Range(1, 3);
+        if (r == 1)
+        {
+            audio.PlayOneShot(pipes1, 0.7F);
+        }
+        else if (r == 2)
+        {
+            audio.PlayOneShot(pipes2, 0.7F);
+
+        }
+        else
+        {
+            audio.PlayOneShot(pipes3, 0.7F);
+        }
+    }
+
     public void BoxLandHard()
     {
         int r = Random.Range(1, 3);

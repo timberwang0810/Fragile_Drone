@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
         magnitude = (newVel.magnitude) / Time.deltaTime;
         previous = transform.position;
-        Debug.Log(velocity);
+        //Debug.Log(velocity);
 
     }
 

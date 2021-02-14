@@ -9,10 +9,13 @@ public class Cargo : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -59,6 +62,10 @@ public class Cargo : MonoBehaviour
         if (v > 5)
         {
             health -= 1;
+            if (health == 1)
+            {
+                animator.SetTrigger("damaged");
+            }
             SoundManager.S.BoxLandHard();
         }
         else
