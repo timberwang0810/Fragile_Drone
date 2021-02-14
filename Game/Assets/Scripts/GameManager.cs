@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI statusText;
 
+    public GameObject middlePanel;
+    public TextMeshProUGUI gameStateText;
+    private bool paused;
+
     public int getReadyTime;
     public int gameTime;
     public int startHP;
@@ -43,7 +47,17 @@ public class GameManager : MonoBehaviour
         score = 0;
         currHP = startHP;
         timeText.text = "Time: " + gameTime;
+        paused = false;
+        middlePanel.SetActive(false);
+        Time.timeScale = 1;
         StartNewGame();
+    }
+
+    private void Update()
+    {
+        if (gameState != GameState.playing ) return;
+        if (Input.GetKeyDown(KeyCode.Escape) && !paused) OnGamePaused();
+        else if (Input.GetKeyDown(KeyCode.Escape) && paused) OnGameUnpaused();
     }
 
     private void StartNewGame()
@@ -55,7 +69,7 @@ public class GameManager : MonoBehaviour
     private void StartRound()
     {
         gameState = GameState.playing;
-        //SoundManager.S.playMusic();
+        SoundManager.S.playMusic();
         StartCoroutine(GameTimer());
     }
 
@@ -63,14 +77,14 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.gameOver;
         SoundManager.S.stopMusic();
-        // TODO: Restart Mechanics (UI button)
+        gameStateText.text = "Game Over\nScore: " + score;
+        middlePanel.SetActive(true);
     }
 
     public void takeDamage()
     {
         if (currHP <= 0) return;
         currHP -= 1;
-        Debug.Log(currHP);
         if (currHP == 0) OnPlayerDeath();
     }
 
@@ -78,18 +92,14 @@ public class GameManager : MonoBehaviour
     {
         StopAllCoroutines();
         gameState = GameState.oops;
-        // TODO: Displays Game Won UI (with coroutine)
-        Debug.Log("WON!");
-        GameOver();
+        StartCoroutine(DisplayStatusTextAtEnd("You win!"));
     }
 
     private void OnPlayerLost()
     {
         StopAllCoroutines();
         gameState = GameState.oops;
-        // TODO: Displays Game Lost UI (with coroutine)
-        Debug.Log("LOST!");
-        GameOver();
+        StartCoroutine(DisplayStatusTextAtEnd("You lost~~"));
     }
     private void OnPlayerDeath()
     {
@@ -103,7 +113,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator GetReady()
     {
         Debug.Log("GetReady!");
-        // TODO: Show pop-up message telling player to get ready
         statusText.enabled = true;
         statusText.text = "Get Ready!";
         for (int i = 0; i < getReadyTime; i++)
@@ -134,10 +143,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator DisplayStatusTextAtEnd(string text)
+    {
+        statusText.text = text;
+        statusText.enabled = true;
+        yield return new WaitForSeconds(5);
+        statusText.enabled = false;
+        GameOver();
+    }
+
     public void scored()
     {
         score += 1;
         scoreText.text = "Score: " + score;
+    }
+
+    public void OnGamePaused()
+    {
+        gameStateText.text = "Game Paused\nScore: " + score;
+        middlePanel.SetActive(true);
+        Time.timeScale = 0;
+        paused = true;
+    }
+
+    public void OnGameUnpaused()
+    {
+        middlePanel.SetActive(false);
+        Time.timeScale = 1;
+        paused = false;
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -21,10 +22,10 @@ public class SoundManager : MonoBehaviour
     public AudioClip pipes3;
     public AudioClip enemyAlert;
 
+    private AudioSource audio;
 
-
-    AudioSource audio;
-
+    public Button MuteButton;
+    public Button UnmuteButton;
 
     //public AudioClip bgm;
 
@@ -39,21 +40,18 @@ public class SoundManager : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void playMusic()
     {
         audio.Play();
+        MuteButton.gameObject.SetActive(true);
+        UnmuteButton.gameObject.SetActive(false);
     }
 
     public void stopMusic()
     {
         audio.Stop();
+        MuteButton.gameObject.SetActive(false);
+        UnmuteButton.gameObject.SetActive(true);
     }
 
     public void DroneHit()
