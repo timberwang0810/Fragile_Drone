@@ -1,0 +1,30 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FloorBreak : MonoBehaviour
+{
+    // Start is called before the first frame update
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        float v = collision.relativeVelocity.magnitude;
+        Debug.Log("collide" + v);
+        if (v > 3)
+        {
+            animator.SetTrigger("broken");
+        }
+    }
+}
