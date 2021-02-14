@@ -21,6 +21,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip pipes2;
     public AudioClip pipes3;
     public AudioClip enemyAlert;
+    public AudioClip gameOver;
+    public AudioClip win;
 
     private AudioSource audio;
 
@@ -136,6 +138,14 @@ public class SoundManager : MonoBehaviour
         audio.PlayOneShot(enemyAlert);
     }
 
+    public void GameOverSound()
+    {
+        audio.PlayOneShot(gameOver, 1.3f);
+    }
 
+    public void WinSound()
+    {
+        audio.PlayOneShot(win);
+    }
 
 }
