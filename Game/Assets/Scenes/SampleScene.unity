@@ -455,7 +455,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224377090}
   - component: {fileID: 224377089}
-  - component: {fileID: 224377091}
   m_Layer: 0
   m_Name: LeakSpot
   m_TagString: Untagged
@@ -476,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   substance: {fileID: 1948160309}
-  audio: {fileID: 224377091}
+  audio: {fileID: 0}
   timeBetweenEmission: 6
   timeOfEmission: 2
   timeStartDelay: 6
@@ -1736,15 +1735,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988887784450451097, guid: 54b9b0fadcb1742c89d82b3e56b8ec84, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.1459966
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6988887784450451097, guid: 54b9b0fadcb1742c89d82b3e56b8ec84, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.1459966
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6988887784450451097, guid: 54b9b0fadcb1742c89d82b3e56b8ec84, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.1459966
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -28663,6 +28662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   substance: {fileID: 859242464}
+  audio: {fileID: 0}
   timeBetweenEmission: 2
   timeOfEmission: 2
   timeStartDelay: 1.5
@@ -28721,6 +28721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   substance: {fileID: 1665844928}
+  audio: {fileID: 0}
   timeBetweenEmission: 2
   timeOfEmission: 2
   timeStartDelay: 1.5
@@ -28905,6 +28906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   substance: {fileID: 819460290}
+  audio: {fileID: 0}
   timeBetweenEmission: 2
   timeOfEmission: 2
   timeStartDelay: 1.5
