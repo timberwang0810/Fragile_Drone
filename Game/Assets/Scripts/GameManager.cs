@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
     {
         StopAllCoroutines();
         gameState = GameState.oops;
+        SoundManager.S.WinSound();
         StartCoroutine(DisplayStatusTextAtEnd("You win!"));
     }
 
@@ -105,10 +106,12 @@ public class GameManager : MonoBehaviour
     {
         StopAllCoroutines();
         gameState = GameState.oops;
+        SoundManager.S.GameOverSound();
         StartCoroutine(DisplayStatusTextAtEnd("You lost~~"));
     }
     private void OnPlayerDeath()
     {
+
         Debug.Log("hi im dead inside");
         // TODO: Add explosion / death effects
         playerObject.transform.DetachChildren();
