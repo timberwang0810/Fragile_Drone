@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     private int currHP;
     public int score;
 
+    // TODO: Box Counts
+
     public GameObject playerObject;
     private Animator playerAnimator;
 
