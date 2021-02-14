@@ -15,8 +15,12 @@ public class ChargingEnemy : Enemy
     private bool facingLeft;
     private Vector2 playerLocation;
 
+    private SpriteRenderer mySpriteRenderer;
+    private float xval;
+
     public LayerMask rayCastLayers;
     public Transform patrolPostLocation;
+
     protected override void OnEnemyDeath()
     {
         Debug.Log("Ahhh im dead");
@@ -52,10 +56,12 @@ public class ChargingEnemy : Enemy
             if (facingLeft)
             {
                 transform.position += Vector3.left * patrolSpeed * Time.deltaTime;
+   
             }
             else
             {
                 transform.position += Vector3.right * patrolSpeed * Time.deltaTime;
+
             }
         }
     }
@@ -84,15 +90,32 @@ public class ChargingEnemy : Enemy
 
         // Set initial location far away
         playerLocation = new Vector2(float.MaxValue, float.MaxValue);
+
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        xval = transform.position.x;
     }
 
     private void Update()
     {
         if (GameManager.S.gameState == GameManager.GameState.playing)
         {
+
+
             Patrol();
             OnPlayerSighting();
             Charge();
+
+            Debug.Log(xval + "   " + transform.position.x);
+            if (transform.position.x - xval >= 0)
+            {
+                mySpriteRenderer.flipX = false;
+            }
+            else
+            {
+                mySpriteRenderer.flipX = true;
+            }
+
+            xval = transform.position.x;
         }   
     }
 
@@ -101,6 +124,7 @@ public class ChargingEnemy : Enemy
         if (patrolling && collision.gameObject.layer == 8)
         {
             facingLeft = !facingLeft;
+            mySpriteRenderer.flipX = !mySpriteRenderer.flipX;
         }        
     }
 
