@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8441679051873121836}
   m_Layer: 0
   m_Name: BreakableFloor
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,9 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10faf1732f4186349a903f5f1bb16df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrier: {fileID: -618476622946698980, guid: b22c8116c4609944185dd416de241604, type: 3}
-  broken: {fileID: 1018431059752871701, guid: b22c8116c4609944185dd416de241604, type: 3}
-  spriteRenderer: {fileID: 0}
 --- !u!95 &8441679051873121836
 Animator:
   serializedVersion: 3
