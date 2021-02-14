@@ -43,9 +43,11 @@ public class Emission : MonoBehaviour
         {
             audio.Play();
             emissionAnimator.SetBool("Emitting", true);
+            substance.GetComponent<BoxCollider2D>().enabled = true;
             yield return new WaitForSeconds(timeOfEmission);
             emissionAnimator.SetBool("Emitting", false);
             audio.Stop();
+            substance.GetComponent<BoxCollider2D>().enabled = true;
             yield return new WaitForSeconds(timeBetweenEmission);
             
         }
