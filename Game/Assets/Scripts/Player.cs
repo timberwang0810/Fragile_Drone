@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
             {
                 ShootClaw();
             }
-            if (holding != null && (Input.GetKeyUp("space") || Vector2.Distance(transform.position, holding.transform.position) > droneReach))
+            if (holding != null && (Input.GetKeyUp("space") || Vector2.Distance(transform.position, holding.transform.position) > droneReach || Vector2.Angle(holding.transform.position - transform.position, Vector2.down) > 35.0f))
             {
                 holding.GetComponent<Rigidbody2D>().gravityScale = 1;
 
