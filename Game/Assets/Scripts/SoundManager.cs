@@ -26,9 +26,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip bombExplode;
     public AudioClip woodHit1;
     public AudioClip woodHit2;
+    public AudioClip woodBreak;
 
 
     private AudioSource audio;
+    public AudioSource bgm;
 
     public Button MuteButton;
     public Button UnmuteButton;
@@ -48,14 +50,14 @@ public class SoundManager : MonoBehaviour
 
     public void playMusic()
     {
-        audio.Play();
+        bgm.Play();
         MuteButton.gameObject.SetActive(true);
         UnmuteButton.gameObject.SetActive(false);
     }
 
     public void stopMusic()
     {
-        audio.Stop();
+        bgm.Stop();
         MuteButton.gameObject.SetActive(false);
         UnmuteButton.gameObject.SetActive(true);
     }
@@ -63,6 +65,11 @@ public class SoundManager : MonoBehaviour
     public void explodeBomb()
     {
         audio.PlayOneShot(bombExplode);
+    }
+
+    public void breakWood()
+    {
+        audio.PlayOneShot(woodBreak);
     }
 
     public void DroneHit()

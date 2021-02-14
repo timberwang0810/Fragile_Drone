@@ -52,6 +52,15 @@ public class Barrel : MonoBehaviour
             SoundManager.S.DronePipe();
         }
 
+        if (collision.gameObject.tag == "Barrel" && collision.gameObject.GetComponent<Barrel>().explosion && !explosion)
+        {
+            animator.SetTrigger("explode");
+            explosion = true;
+            rb.bodyType = RigidbodyType2D.Static;
+            SoundManager.S.explodeBomb();
+            Destroy(this.gameObject, 0.5f);
+        }
+
         if (explosion)
         {
             if (collision.gameObject.tag == "Player")
@@ -74,8 +83,23 @@ public class Barrel : MonoBehaviour
                 dir.Normalize();
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir / 300, ForceMode2D.Impulse);
             }
-            
+            if (collision.gameObject.tag == "Wood")
+            {
+                if (collision.gameObject.GetComponent<FloorBreak>() != null)
+                {
+                    collision.gameObject.GetComponent<FloorBreak>().explode();
+                }
+                else if (collision.gameObject.GetComponent<WallBreak>() != null)
+                {
+                    collision.gameObject.GetComponent<WallBreak>().explode();
+                }
+            }
         }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         
     }
 

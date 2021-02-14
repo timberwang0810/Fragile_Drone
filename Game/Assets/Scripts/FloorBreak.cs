@@ -22,9 +22,15 @@ public class FloorBreak : MonoBehaviour
     {
         float v = collision.relativeVelocity.magnitude;
         Debug.Log("collide" + v);
-        if (v > 3)
+        if (v > 20)
         {
-            animator.SetTrigger("broken");
+            explode();
         }
+    }
+
+    public void explode()
+    {
+        SoundManager.S.breakWood();
+        animator.SetTrigger("broken");
     }
 }
