@@ -9,6 +9,7 @@ public class ButtonManager : MonoBehaviour
 
     public void btn_StartTheGame()
     {
+        Time.timeScale = 1;
         StartCoroutine(StartTheGame());
     }
 
@@ -33,6 +34,7 @@ public class ButtonManager : MonoBehaviour
 
     public void btn_Credits()
     {
+        Time.timeScale = 1;
         StartCoroutine(Credits());
     }
     public IEnumerator Credits()
@@ -45,6 +47,7 @@ public class ButtonManager : MonoBehaviour
 
     public void btn_QuitGame()
     {
+        Time.timeScale = 1;
         StartCoroutine(Quit());
     }
     public IEnumerator Quit()
@@ -56,6 +59,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void btn_Back()
     {
+        Time.timeScale = 1;
         StartCoroutine(Back());
     }
     public IEnumerator Back()

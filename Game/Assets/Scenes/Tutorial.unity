@@ -1094,9 +1094,11 @@ MonoBehaviour:
 
     Hold Space bar to pick up cargo
 
+    Esc to pause
 
-    Bring as
-    many boxes to the loading zone without damaging them!'
+
+    Bring
+    as many boxes to the loading zone without damaging them!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 635ae1b314df9e644b1ea14869613e45, type: 2}
   m_sharedMaterial: {fileID: 5497078294773494192, guid: 635ae1b314df9e644b1ea14869613e45, type: 2}
