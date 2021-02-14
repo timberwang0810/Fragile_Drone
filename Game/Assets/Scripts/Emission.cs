@@ -40,8 +40,10 @@ public class Emission : MonoBehaviour
         while (true)
         {
             emissionAnimator.SetBool("Emitting", true);
+            substance.GetComponent<BoxCollider2D>().enabled = true;
             yield return new WaitForSeconds(timeOfEmission);
             emissionAnimator.SetBool("Emitting", false);
+            substance.GetComponent<BoxCollider2D>().enabled = true;
             yield return new WaitForSeconds(timeBetweenEmission);
         }
     }
