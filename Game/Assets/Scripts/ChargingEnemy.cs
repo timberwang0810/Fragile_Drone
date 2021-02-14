@@ -88,9 +88,12 @@ public class ChargingEnemy : Enemy
 
     private void Update()
     {
-        Patrol();
-        OnPlayerSighting();
-        Charge();
+        if (GameManager.S.gameState == GameManager.GameState.playing)
+        {
+            Patrol();
+            OnPlayerSighting();
+            Charge();
+        }   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -98,9 +101,7 @@ public class ChargingEnemy : Enemy
         if (patrolling && collision.gameObject.layer == 8)
         {
             facingLeft = !facingLeft;
-        }
-
-        
+        }        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
