@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
                 holding.GetComponent<Rigidbody2D>().gravityScale = 1;
 
                 Vector2 v = GetComponent<PlayerMovement>().velocity;
-                Debug.Log("drop" + v);
+                //Debug.Log("drop" + v);
                 holding.GetComponent<Rigidbody2D>().AddRelativeForce(v / 300, ForceMode2D.Force);
 
             
@@ -86,6 +86,18 @@ public class Player : MonoBehaviour
             animator.SetBool("carrying", true);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Cargo" || collision.gameObject.tag == "Enemy")
+        {
+            
+        } else
+        {
+            SoundManager.S.DronePipe();
+        }
+    }
+
     //private void OnTriggerStay2D(Collider2D collision)
     //{
     //    if (collision.gameObject.tag == "Cargo")

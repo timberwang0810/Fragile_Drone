@@ -2236,7 +2236,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.96}
-  m_Size: {x: 1.44, y: 2.36}
+  m_Size: {x: 0.97, y: 2.52}
   m_Direction: 0
 --- !u!58 &596587763
 CircleCollider2D:
@@ -3161,8 +3161,8 @@ GameObject:
   - component: {fileID: 1185550719}
   - component: {fileID: 1185550722}
   m_Layer: 14
-  m_Name: Enemy
-  m_TagString: Untagged
+  m_Name: New Sprite
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3226,7 +3226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185550716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.43, y: 7.14, z: 0}
+  m_LocalPosition: {x: 10.92, y: 14.26, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3330,7 +3330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193885705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.87, y: 6.89, z: -13.085092}
+  m_LocalPosition: {x: 1.9, y: 14.25, z: -13.085092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5995,7 +5995,7 @@ MonoBehaviour:
   gameStateText: {fileID: 2014237370}
   getReadyTime: 3
   gameTime: 120
-  startHP: 3
+  startHP: 5
   score: 0
   playerObject: {fileID: 596587757}
 --- !u!4 &1792616515 stripped
