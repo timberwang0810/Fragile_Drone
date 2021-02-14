@@ -35,13 +35,5 @@ public class PlayerMovement : MonoBehaviour
 
         magnitude = (newVel.magnitude) / Time.deltaTime;
         previous = transform.position;
-        //Debug.Log(velocity);
-
     }
-
-    //private void FixedUpdate()
-    //{
-    //    controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-    //    jump = false;
-    //}
 }

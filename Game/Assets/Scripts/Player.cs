@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
                 holding.GetComponent<Rigidbody2D>().gravityScale = 1;
 
                 Vector2 v = GetComponent<PlayerMovement>().velocity;
-                //Debug.Log("drop" + v);
                 holding.GetComponent<Rigidbody2D>().AddRelativeForce(v / 300, ForceMode2D.Force);
 
             
@@ -68,19 +67,13 @@ public class Player : MonoBehaviour
 
     private void ShootClaw()
     {
-        //Debug.Log("space pressed");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, droneReach, pickupLayers);
-        //Debug.DrawLine(transform.position, transform.position + Vector3.down * droneReach, Color.blue, 10f);
         Collider2D collision = hit.collider;
         if (collision == null) return;
         if (collision.gameObject.CompareTag("Cargo") || collision.gameObject.CompareTag("Barrel"))
         {
-            Debug.Log("Hit!!!");
             collision.transform.parent = transform;
             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-            //Vector3 newPos = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
-
-            //collision.transform.position = newPos;
             holding = collision.gameObject;
 
             animator.SetBool("carrying", true);
@@ -101,38 +94,5 @@ public class Player : MonoBehaviour
             SoundManager.S.DronePipe();
         }
     }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Cargo")
-    //    {
-    //        if (Input.GetKeyDown("space") && holding == null)
-    //        {
-    //            //Debug.Log("space pressed");
-    //            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, droneReach);
-    //            if (hit.collider.gameObject.CompareTag("Cargo"))
-    //            {
-    //                collision.transform.parent = transform;
-    //                collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-    //                Vector3 newPos = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
-
-    //                collision.transform.position = newPos;
-    //                holding = collision.gameObject;
-    //            }
-                
-    //        }
-    //    }
-    //}
-
-//     private void OnTriggerExit2D(Collider2D collision)
-//     {
-//         if (collision.gameObject.tag == "Cargo")
-//         {
-//             holding = null;
-//             collision.transform.parent = null;
-//             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-//             animator.SetBool("carrying", false);
-//         }
-//     }
 
 }

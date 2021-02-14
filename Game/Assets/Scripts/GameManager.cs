@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
         SoundManager.S.DroneHit();
         if (currHP <= 0) return;
         currHP -= 1;
-        Debug.Log(currHP);
         if (currHP == 0) OnPlayerDeath();
     }
 
@@ -112,9 +111,6 @@ public class GameManager : MonoBehaviour
     }
     private void OnPlayerDeath()
     {
-
-        Debug.Log("hi im dead inside");
-        // TODO: Add explosion / death effects
         playerObject.transform.DetachChildren();
         Destroy(playerObject);
         OnPlayerLost();
@@ -122,7 +118,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GetReady()
     {
-        Debug.Log("GetReady!");
         statusText.enabled = true;
         statusText.text = "Get Ready!";
         for (int i = 0; i < getReadyTime; i++)
@@ -134,7 +129,6 @@ public class GameManager : MonoBehaviour
         statusText.text = "Go!";
         yield return new WaitForSeconds(1);
         statusText.enabled = false;
-        Debug.Log("Go");
         StartRound();
     }
 
@@ -142,7 +136,6 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < gameTime; i++)
         {
-            //Debug.Log(i);
             yield return new WaitForSeconds(1);
             timeText.text = "Time: " + (gameTime - i);
 

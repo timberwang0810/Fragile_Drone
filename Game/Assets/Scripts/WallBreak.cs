@@ -21,7 +21,6 @@ public class WallBreak : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         float v = collision.relativeVelocity.magnitude;
-        Debug.Log("collide" + v);
         if (v > 20)
         {
             explode();

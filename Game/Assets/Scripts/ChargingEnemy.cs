@@ -23,8 +23,6 @@ public class ChargingEnemy : Enemy
 
     protected override void OnEnemyDeath()
     {
-        Debug.Log("Ahhh im dead");
-        // TODO: Add enemy explosion effects
         Destroy(this.gameObject);
     }
 
@@ -48,7 +46,6 @@ public class ChargingEnemy : Enemy
         if (!patrolling && transform.position != patrolPostLocation.position)
         {
             transform.position = patrolPostLocation.position;
-            // TODO: Add cool teleportation effect
         }
         else
         {
@@ -99,13 +96,10 @@ public class ChargingEnemy : Enemy
     {
         if (GameManager.S.gameState == GameManager.GameState.playing)
         {
-
-
             Patrol();
             OnPlayerSighting();
             Charge();
 
-            Debug.Log(xval + "   " + transform.position.x);
             if (transform.position.x - xval >= 0)
             {
                 mySpriteRenderer.flipX = false;

@@ -31,9 +31,8 @@ public class Cargo : MonoBehaviour
     {
         if (collision.gameObject.tag == "LoadingBay")
         {
-            Debug.Log("scored");
-            Destroy(this.gameObject);
             GameManager.S.scored();
+            Destroy(this.gameObject);
         }
     }
 
@@ -45,13 +44,10 @@ public class Cargo : MonoBehaviour
         if (transform.parent != null)
         {
             v = transform.parent.GetComponentInParent<PlayerMovement>().magnitude;
-            //hit = 0.5f * rb.mass * Mathf.Pow(transform.parent.GetComponentInParent<Rigidbody2D>().velocity.magnitude, 2);
         }
         else {
             v = collision.relativeVelocity.magnitude;
-            //Debug.Log("no parent " + v2);
         }
-        //Debug.Log(hit);
         if (v > 5)
         {
             takeDamage(1);
@@ -67,7 +63,6 @@ public class Cargo : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        Debug.Log("ouch");
         health -= damage;
         if (health == 1)
         {

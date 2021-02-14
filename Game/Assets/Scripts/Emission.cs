@@ -52,22 +52,4 @@ public class Emission : MonoBehaviour
             
         }
     }
-
-    /**
-     * Alternate Version below
-     **/
-
-    //private void StartEmitLoop()
-    //{
-    //    StartCoroutine(Emit());
-    //}
-
-    //private IEnumerator Emit()
-    //{ 
-    //    substance.SetActive(true);
-    //    yield return new WaitForSeconds(timeOfEmission);
-    //    substance.SetActive(false);
-    //    yield return new WaitForSeconds(timeBetweenEmission);
-    //    StartEmitLoop();
-    //}
 }
