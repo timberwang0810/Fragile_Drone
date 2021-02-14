@@ -52,6 +52,15 @@ public class Barrel : MonoBehaviour
             SoundManager.S.DronePipe();
         }
 
+        if (collision.gameObject.tag == "Barrel" && collision.gameObject.GetComponent<Barrel>().explosion && !explosion)
+        {
+            animator.SetTrigger("explode");
+            explosion = true;
+            rb.bodyType = RigidbodyType2D.Static;
+            SoundManager.S.explodeBomb();
+            Destroy(this.gameObject, 0.5f);
+        }
+
         if (explosion)
         {
             if (collision.gameObject.tag == "Player")
