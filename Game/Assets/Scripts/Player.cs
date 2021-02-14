@@ -92,7 +92,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Cargo" || collision.gameObject.tag == "Enemy")
         {
             
-        } else
+        } else if (collision.gameObject.tag == "Wood")
+        {
+            SoundManager.S.WoodHit();
+        }
+        else
         {
             SoundManager.S.DronePipe();
         }

@@ -24,6 +24,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip gameOver;
     public AudioClip win;
     public AudioClip bombExplode;
+    public AudioClip woodHit1;
+    public AudioClip woodHit2;
+
 
     private AudioSource audio;
 
@@ -100,6 +103,19 @@ public class SoundManager : MonoBehaviour
         else
         {
             audio.PlayOneShot(pipes3, 0.7F);
+        }
+    }
+
+    public void WoodHit()
+    {
+        int r = Random.Range(1, 2);
+        if (r == 1)
+        {
+            audio.PlayOneShot(woodHit1, 2f);
+        }
+        else
+        {
+            audio.PlayOneShot(woodHit2, 2f);
         }
     }
 
