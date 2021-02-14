@@ -52,20 +52,31 @@ public class Barrel : MonoBehaviour
             SoundManager.S.DronePipe();
         }
 
-        if (collision.gameObject.tag == "Player" && explosion)
+        if (explosion)
         {
-            GameManager.S.takeDamage();
-            Vector2 dir = collision.gameObject.transform.position - transform.position;
-            dir.Normalize();
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 15, ForceMode2D.Impulse);
+            if (collision.gameObject.tag == "Player")
+            {
+                GameManager.S.takeDamage();
+                Vector2 dir = collision.gameObject.transform.position - transform.position;
+                dir.Normalize();
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 15, ForceMode2D.Impulse);
+            }
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Destroy(collision.gameObject);
+                Vector2 dir = collision.gameObject.transform.position - transform.position;
+                dir.Normalize();
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 15, ForceMode2D.Impulse);
+            }
+            if (collision.gameObject.tag == "Cargo")
+            {
+                Vector2 dir = collision.gameObject.transform.position - transform.position;
+                dir.Normalize();
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir / 300, ForceMode2D.Impulse);
+            }
+            
         }
-        if (collision.gameObject.tag == "Enemy" && explosion)
-        {
-            Vector2 dir = collision.gameObject.transform.position - transform.position;
-            dir.Normalize();
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 15, ForceMode2D.Impulse);
-            Destroy(collision.gameObject);
-        }
+        
     }
 
 
