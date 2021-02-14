@@ -6,6 +6,7 @@ public class Emission : MonoBehaviour
 {
     // Emitted Substance (e.g. fire, steam)
     public GameObject substance;
+    public AudioSource audio;
 
     // Time of emission breaks
     public float timeBetweenEmission;
@@ -20,6 +21,7 @@ public class Emission : MonoBehaviour
 
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
         emissionAnimator = substance.GetComponent<Animator>();
         StartEmission();
     }
@@ -39,10 +41,13 @@ public class Emission : MonoBehaviour
     {
         while (true)
         {
+            audio.Play();
             emissionAnimator.SetBool("Emitting", true);
             yield return new WaitForSeconds(timeOfEmission);
             emissionAnimator.SetBool("Emitting", false);
+            audio.Stop();
             yield return new WaitForSeconds(timeBetweenEmission);
+            
         }
     }
 
